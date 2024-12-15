@@ -1,22 +1,30 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleProp, TextStyle } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 interface ButtonProps {
-  text: string | number;
-  textStyle?: StyleProp<TextStyle>;
+  text: string;
   onPress: () => void;
+  style?: any;
 }
 
-const ButtonComponent: React.FC<ButtonProps> = ({
-  onPress,
-  text,
-  textStyle,
-}) => {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <Text style={textStyle}>{text === "*" ? "X" : text}</Text>
-    </TouchableOpacity>
-  );
-};
+const Button: React.FC<ButtonProps> = ({ text, onPress, style }) => (
+  <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+    <Text style={styles.buttonText}>{text}</Text>
+  </TouchableOpacity>
+);
 
-export default ButtonComponent;
+const styles = StyleSheet.create({
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    borderRadius: 10,
+  },
+  buttonText: {
+    fontSize: 24,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});
+
+export default Button;
